@@ -1,11 +1,5 @@
 ## Getting Started
 
-First, install dependencies:
-
-```bash
-npm ci
-```
-
 Run the development server:
 
 ```bash
