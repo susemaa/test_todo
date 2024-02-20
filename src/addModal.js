@@ -1,5 +1,5 @@
 import { updateLists } from './lists';
-import { getUniqueId } from '../lib';
+import { getUniqueId, escapeHtml } from '../lib';
 
 const map = {
   header: {
@@ -61,15 +61,15 @@ export function addModal(type, store, listId) {
       if (type === 'addList') {
         store.lists.push({
           id: getUniqueId(),
-          name: nameInput.value,
+          name: escapeHtml(nameInput.value),
           todos: [],
         });
       } else if (type === 'addTodo') {
         store.lists.forEach((list) => {
           if (list.id === listId)
             list.todos.push({
-              name: nameInput.value,
-              description: descriptionInput.value,
+              name: escapeHtml(nameInput.value),
+              description: escapeHtml(descriptionInput.value),
               id: getUniqueId(),
               finished: false,
             });
@@ -77,7 +77,7 @@ export function addModal(type, store, listId) {
       } else if (type === 'editListName') {
         store.lists.forEach((list) => {
           if (list.id === listId)
-            list.name = nameInput.value;
+            list.name = escapeHtml(nameInput.value);
         });
       }
       updateLists(store);
